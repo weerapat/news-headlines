@@ -1,5 +1,15 @@
 <template>
   <v-app>
+    <v-navigation-drawer app>
+      <div class="pa-4">
+        <h2>Visited Headlines</h2>
+        <ul>
+          <li v-for="visitedHeadline in visitedHeadlines" :key="visitedHeadline">
+            {{ visitedHeadline }}
+          </li>
+        </ul>
+      </div>
+    </v-navigation-drawer>
     <v-app-bar app>
       App bar
     </v-app-bar>
@@ -25,8 +35,10 @@
 export default {
   name: 'App',
 
-  data: () => ({
-    //
-  }),
+  computed: {
+    visitedHeadlines() {
+      return this.$store.state.visitedHeadlines;
+    },
+  },
 };
 </script>

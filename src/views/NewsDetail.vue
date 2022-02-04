@@ -12,7 +12,11 @@
 <script>
 export default {
   name: 'NewsDetail',
-
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.$store.dispatch('addVisitedHeadline', to.path);
+    });
+  },
   mounted() {
     this.$store.dispatch('fetchNewsHeadlines');
   },

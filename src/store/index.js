@@ -12,6 +12,7 @@ export default new Vuex.Store({
       isLoading: false,
       data: {},
     },
+    visitedHeadlines: [],
   },
   mutations: {
     updateNewsHeadlines(state, newsHeadlines) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     updateNewsHeadline(state, params) {
       state.newsHeadlines.data[params.slug].title = params.title;
+    },
+    addVisitedHeadline(state, headline) {
+      state.visitedHeadlines.push(headline);
     },
   },
   actions: {
@@ -45,6 +49,9 @@ export default new Vuex.Store({
     },
     updateNewsHeadline({ commit }, params) {
       return commit('updateNewsHeadline', params);
+    },
+    addVisitedHeadline({ commit }, headline) {
+      return commit('addVisitedHeadline', headline);
     },
   },
   modules: {
