@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="4"
+      <v-col v-if='isLoading' cols="12">..Loading</v-col>
+      <v-col v-else cols="4"
           v-for="newsHeadline in newsHeadlines" :key="newsHeadline.slug"
       >
         <v-card
@@ -34,7 +35,10 @@ export default {
   },
   computed: {
     newsHeadlines() {
-      return this.$store.state.newsHeadlines;
+      return this.$store.state.newsHeadlines.data;
+    },
+    isLoading() {
+      return this.$store.state.newsHeadlines.isLoading;
     },
   },
 };

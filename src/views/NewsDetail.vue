@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     news() {
-      return this.$store.state.newsHeadlines[this.$route.params.slug];
+      return this.$store.state.newsHeadlines.data[this.$route.params.slug];
     },
   },
 };
