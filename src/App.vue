@@ -9,7 +9,6 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <router-link to="/">Go to Home</router-link>
-        <router-link to="/detail">Go to Detail Page</router-link>
         <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>

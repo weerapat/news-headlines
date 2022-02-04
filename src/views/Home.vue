@@ -1,15 +1,15 @@
 <template>
-  <headline-news />
+  <news-headlines />
 </template>
 
 <script>
-import HeadlineNews from '../components/HeadlineNews.vue';
+import NewsHeadlines from '../components/NewsHeadlines.vue';
 
 export default {
   name: 'Home',
 
   components: {
-    HeadlineNews,
+    NewsHeadlines,
   },
 };
 </script>
