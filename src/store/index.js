@@ -20,6 +20,9 @@ export default new Vuex.Store({
     isNewsHeadlinesLoading(state, loadingStatus) {
       state.newsHeadlines.isLoading = loadingStatus;
     },
+    updateNewsHeadline(state, params) {
+      state.newsHeadlines.data[params.slug].title = params.title;
+    },
   },
   actions: {
     fetchNewsHeadlines({ commit }) {
@@ -39,6 +42,9 @@ export default new Vuex.Store({
           commit('updateNewsHeadlines', normalize(newsHeadlines, [newsHeadlineSchema]).entities.newsHeadlines);
           commit('isNewsHeadlinesLoading', false);
         });
+    },
+    updateNewsHeadline({ commit }, params) {
+      return commit('updateNewsHeadline', params);
     },
   },
   modules: {
