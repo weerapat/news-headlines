@@ -1,15 +1,15 @@
 <template>
-  <hello-world />
+  <headline-news />
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld.vue';
+import HeadlineNews from '../components/HeadlineNews.vue';
 
 export default {
   name: 'Home',
 
   components: {
-    HelloWorld,
+    HeadlineNews,
   },
 };
 </script>

@@ -1,9 +1,5 @@
 <template>
   <v-app>
-    <v-navigation-drawer app>
-      Hello
-    </v-navigation-drawer>
-
     <v-app-bar app>
       App bar
     </v-app-bar>
