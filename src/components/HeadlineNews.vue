@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="4"
-          v-for="article in articles" :key="article.title"
+          v-for="article in articles" :key="article.slug"
       >
         <v-card
           elevation="2"
@@ -11,7 +11,7 @@
         >
           <v-card-title>{{ article.title }}</v-card-title>
           <v-card-text>{{ article.description }}</v-card-text>
-          <router-link to="/detail">
+          <router-link :to="{ name: 'Detail', params: { slug: article.slug }}">
             <v-btn
               text
               color="deep-purple accent-4"
