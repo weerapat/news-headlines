@@ -14,7 +14,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-if='isNewsHeadlinesLoading' cols="12">
+      <v-col v-if='isHeadlinesLoading' cols="12">
         ..Loading
         <v-progress-circular
         indeterminate
@@ -49,7 +49,7 @@
       </v-col>
     </v-row>
 
-    <!-- Editing title form -->
+    <!-- Edit title form -->
     <v-dialog
       v-model="dialog"
       width="500"
@@ -67,7 +67,7 @@
           <v-card-text>
             <v-text-field
               label="News Title*"
-              v-model="form.editTitle"
+              v-model="form.title"
               :counter="150"
               :rules="validations.title"
               required
@@ -109,7 +109,7 @@ export default {
     form: {
       isValid: false,
       headlineId: null,
-      editTitle: '',
+      title: '',
     },
     validations: {
       title: [
@@ -127,13 +127,13 @@ export default {
     openDialog(slug, title) {
       this.dialog = true;
       this.form.headlineId = slug;
-      this.form.editTitle = title;
+      this.form.title = title;
     },
     updateTitle() {
       this.dialog = false;
       this.$store.dispatch('updateNewsHeadline',
         {
-          slug: this.form.headlineId, title: this.form.editTitle,
+          slug: this.form.headlineId, title: this.form.title,
         });
     },
   },
@@ -142,18 +142,14 @@ export default {
     this.$store.dispatch('fetchSources');
   },
   computed: {
-    newsHeadlines() {
-      return this.$store.state.newsHeadlines.data;
+    filteredHeadlines() {
+      return this.$store.getters.getNewsHeadlinesBySource(this.filterSource);
     },
-    isNewsHeadlinesLoading() {
+    isHeadlinesLoading() {
       return this.$store.state.newsHeadlines.isLoading;
     },
     sources() {
       return this.$store.state.sources.data;
-    },
-    filteredHeadlines() {
-      console.log(this.filterSource);
-      return this.$store.getters.getNewsHeadlinesBySource(this.filterSource);
     },
   },
 };
