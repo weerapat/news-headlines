@@ -1,14 +1,27 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-if='isLoading' cols="12">
+      <v-col v-if='sources.length' cols="12">
+        Filter
+        <v-select
+          v-model="filterSource"
+          :items="sources"
+          item-text="name"
+          item-value="id"
+          label="Sources"
+          clearable
+        ></v-select>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if='isNewsHeadlinesLoading' cols="12">
         ..Loading
         <v-progress-circular
         indeterminate
         color="primary"></v-progress-circular>
       </v-col>
       <v-col v-else cols="4"
-          v-for="newsHeadline in newsHeadlines" :key="newsHeadline.slug"
+          v-for="newsHeadline in filteredHeadlines" :key="newsHeadline.slug"
       >
         <v-card
           elevation="2"
@@ -92,6 +105,7 @@ export default {
   name: 'NewsHeadlines',
   data: () => ({
     dialog: false,
+    filterSource: null,
     form: {
       isValid: false,
       headlineId: null,
@@ -125,13 +139,21 @@ export default {
   },
   mounted() {
     this.$store.dispatch('fetchNewsHeadlines');
+    this.$store.dispatch('fetchSources');
   },
   computed: {
     newsHeadlines() {
       return this.$store.state.newsHeadlines.data;
     },
-    isLoading() {
+    isNewsHeadlinesLoading() {
       return this.$store.state.newsHeadlines.isLoading;
+    },
+    sources() {
+      return this.$store.state.sources.data;
+    },
+    filteredHeadlines() {
+      console.log(this.filterSource);
+      return this.$store.getters.getNewsHeadlinesBySource(this.filterSource);
     },
   },
 };
