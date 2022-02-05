@@ -1,8 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-if='sources.length' cols="12">
-        Filter
+      <v-col v-if='sources.length' cols="4">
         <v-select
           v-model="filterSource"
           :items="sources"
@@ -11,6 +10,12 @@
           label="Sources"
           clearable
         ></v-select>
+      </v-col>
+      <v-col cols="4">
+        <v-text-field
+          label="Append"
+          append-icon="mdi-magnify"
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-row>
