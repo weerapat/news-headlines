@@ -1,20 +1,13 @@
 <template>
   <div>
     <router-link to="/">Go to Home</router-link>
-    <v-col v-if='isLoading'>
-      ..Loading
-      <v-progress-circular
-        indeterminate
-        color="primary"></v-progress-circular>
-    </v-col>
-    <div v-else>
-      <v-img
-        :src="news.urlToImage"
-        max-width="500"
-      ></v-img>
-      <h1>{{ news.title }}</h1>
-      <p>{{ news.content }}</p>
-    </div>
+    <v-img
+      v-if="news.urlToImage"
+      :src="news.urlToImage"
+      max-width="500"
+    ></v-img>
+    <h1>{{ news.title }}</h1>
+    <p>{{ news.content }}</p>
   </div>
 </template>
 
