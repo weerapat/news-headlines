@@ -3,7 +3,7 @@
     <v-row>
       <v-col v-if='sources.length' cols="4">
         <v-select
-          v-model="filterSource"
+          v-model="filters.source"
           :items="sources"
           item-text="name"
           item-value="id"
@@ -13,7 +13,9 @@
       </v-col>
       <v-col cols="4">
         <v-text-field
-          label="Append"
+          v-model="search"
+          label="Search"
+          clearable
           append-icon="mdi-magnify"
         ></v-text-field>
       </v-col>
@@ -56,7 +58,7 @@
 
     <!-- Edit title form -->
     <v-dialog
-      v-model="dialog"
+      v-model="isDialogOpen"
       width="500"
     >
       <v-card>
@@ -86,7 +88,7 @@
             <v-btn
               color="blue darken-1"
               text
-              @click="dialog = false"
+              @click="isDialogOpen = false"
             >
               Close
             </v-btn>
@@ -106,11 +108,16 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce';
+
 export default {
   name: 'NewsHeadlines',
   data: () => ({
-    dialog: false,
-    filterSource: null,
+    isDialogOpen: false,
+    search: '',
+    filters: {
+      source: null,
+    },
     form: {
       isValid: false,
       headlineId: null,
@@ -123,6 +130,10 @@ export default {
       ],
     },
   }),
+  mounted() {
+    this.$store.dispatch('fetchNewsHeadlines');
+    this.$store.dispatch('fetchSources');
+  },
   methods: {
     /**
      * Open Dialog for editing news headline title
@@ -130,31 +141,36 @@ export default {
      * @param title
      */
     openDialog(slug, title) {
-      this.dialog = true;
+      this.isDialogOpen = true;
       this.form.headlineId = slug;
       this.form.title = title;
     },
     updateTitle() {
-      this.dialog = false;
+      this.isDialogOpen = false;
       this.$store.dispatch('updateNewsHeadline',
         {
           slug: this.form.headlineId, title: this.form.title,
         });
     },
-  },
-  mounted() {
-    this.$store.dispatch('fetchNewsHeadlines');
-    this.$store.dispatch('fetchSources');
+    // eslint-disable-next-line func-names
+    searchHeadlines: debounce(function (search) {
+      this.$store.dispatch('fetchNewsHeadlines', search);
+    }, 1000),
   },
   computed: {
     filteredHeadlines() {
-      return this.$store.getters.getNewsHeadlinesBySource(this.filterSource);
+      return this.$store.getters.getNewsHeadlinesBySource(this.filters.source);
     },
     isHeadlinesLoading() {
       return this.$store.state.newsHeadlines.isLoading;
     },
     sources() {
       return this.$store.state.sources.data;
+    },
+  },
+  watch: {
+    search(val) {
+      this.searchHeadlines(val);
     },
   },
 };

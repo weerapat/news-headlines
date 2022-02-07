@@ -52,10 +52,12 @@ export default new Vuex.Store({
           commit('updateSourcesLoading', false);
         });
     },
-    fetchNewsHeadlines({ commit }) {
+    fetchNewsHeadlines({ commit }, search = null) {
       commit('updateNewsHeadlinesLoading', true);
+      const queryParam = search ? `q=${encodeURI(search)}` : 'country=us';
+
       axios
-        .get(`${baseUrl}/top-headlines?country=us&apiKey=${apiKey}`)
+        .get(`${baseUrl}/top-headlines?${queryParam}&apiKey=${apiKey}`)
         .then((response) => {
           const { data } = response;
           const newsHeadlines = data.articles.map((newsHeadline) => ({
