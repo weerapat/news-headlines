@@ -4,14 +4,14 @@
       <div class="pa-4">
         <h2>Visited Headlines</h2>
         <ul>
-          <li v-for="visitedHeadline in visitedHeadlines" :key="visitedHeadline">
+          <li v-for="(visitedHeadline, index) in visitedHeadlines" :key="index + visitedHeadline">
             {{ visitedHeadline }}
           </li>
         </ul>
       </div>
     </v-navigation-drawer>
     <v-app-bar app>
-      App bar
+      News
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
