@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col v-if='sources.length' cols="4">
+      <v-col v-if='sources.length' sm="6" md="4">
         <v-select
           v-model="filters.source"
           :items="sources"
@@ -11,7 +11,7 @@
           clearable
         ></v-select>
       </v-col>
-      <v-col cols="4">
+      <v-col sm="6" md="4">
         <v-text-field
           v-model="search"
           label="Search"
@@ -27,7 +27,7 @@
         indeterminate
         color="primary"></v-progress-circular>
       </v-col>
-      <v-col v-else cols="4"
+      <v-col v-else cols="12" sm="6" md="4"
           v-for="newsHeadline in filteredHeadlines" :key="newsHeadline.slug"
       >
         <v-card
