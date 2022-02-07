@@ -3,9 +3,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import { normalize, schema } from 'normalizr';
 import { transformSlug } from '../utils/string';
-
-const baseUrl = 'https://newsapi.org/v2';
-const apiKey = '099148be22804e849a0c6fe022b7cf5e';
+import { apiKey, baseUrl } from '../config';
 
 Vue.use(Vuex);
 
@@ -28,7 +26,7 @@ export default new Vuex.Store({
     updateNewsHeadlinesLoading(state, loadingStatus) {
       state.newsHeadlines.isLoading = loadingStatus;
     },
-    updateNewsHeadline(state, params) {
+    updateNewsHeadlineTitle(state, params) {
       state.newsHeadlines.data[params.slug].title = params.title;
     },
     updateSources(state, sources) {
@@ -72,8 +70,8 @@ export default new Vuex.Store({
           commit('updateNewsHeadlinesLoading', false);
         });
     },
-    updateNewsHeadline({ commit }, params) {
-      return commit('updateNewsHeadline', params);
+    updateNewsHeadlineTitle({ commit }, params) {
+      return commit('updateNewsHeadlineTitle', params);
     },
     addVisitedHeadline({ commit }, headline) {
       return commit('addVisitedHeadline', headline);

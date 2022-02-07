@@ -145,9 +145,13 @@ export default {
       this.form.headlineId = slug;
       this.form.title = title;
     },
+
+    /**
+     * Update title of headline
+     */
     updateTitle() {
       this.isDialogOpen = false;
-      this.$store.dispatch('updateNewsHeadline',
+      this.$store.dispatch('updateNewsHeadlineTitle',
         {
           slug: this.form.headlineId, title: this.form.title,
         });
