@@ -36,7 +36,7 @@ export default {
 
   computed: {
     visitedHeadlines() {
-      return this.$store.state.visitedHeadlines;
+      return this.$store.state.visitedHeadlines.data;
     },
   },
 };

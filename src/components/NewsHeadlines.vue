@@ -131,8 +131,8 @@ export default {
     },
   }),
   mounted() {
-    this.$store.dispatch('fetchNewsHeadlines');
-    this.$store.dispatch('fetchSources');
+    this.$store.dispatch('newsHeadlines/get');
+    this.$store.dispatch('sources/get');
   },
   methods: {
     /**
@@ -151,19 +151,19 @@ export default {
      */
     updateTitle() {
       this.isDialogOpen = false;
-      this.$store.dispatch('updateNewsHeadlineTitle',
+      this.$store.dispatch('newsHeadlines/updateTitle',
         {
           slug: this.form.headlineId, title: this.form.title,
         });
     },
     // eslint-disable-next-line func-names
     searchHeadlines: debounce(function (search) {
-      this.$store.dispatch('fetchNewsHeadlines', search);
+      this.$store.dispatch('newsHeadlines/get', search);
     }, 1000),
   },
   computed: {
     filteredHeadlines() {
-      return this.$store.getters.getNewsHeadlinesBySource(this.filters.source);
+      return this.$store.getters['newsHeadlines/getBySource'](this.filters.source);
     },
     isHeadlinesLoading() {
       return this.$store.state.newsHeadlines.isLoading;

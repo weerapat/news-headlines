@@ -16,18 +16,12 @@ export default {
   name: 'NewsDetail',
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      vm.$store.dispatch('addVisitedHeadline', to.path);
+      vm.$store.dispatch('visitedHeadlines/add', to.path);
     });
-  },
-  mounted() {
-    this.$store.dispatch('fetchNewsHeadlines');
   },
   computed: {
     news() {
       return this.$store.state.newsHeadlines.data[this.$route.params.slug];
-    },
-    isLoading() {
-      return this.$store.state.newsHeadlines.isLoading;
     },
   },
 };
