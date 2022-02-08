@@ -41,7 +41,7 @@
               :src="newsHeadline.urlToImage"
             ></v-img>
           </router-link>
-          <v-card-title class="text-h d-inline-block">
+          <v-card-title class="text-h d-inline-block py-2">
             {{ newsHeadline.title }}
             <v-btn
               x-small
@@ -51,7 +51,7 @@
               edit
             </v-btn>
           </v-card-title>
-          <v-card-subtitle>
+          <v-card-subtitle class="mt-0 pb-1">
             <v-icon
               small
               color="grey darken-2"

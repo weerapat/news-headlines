@@ -1,10 +1,13 @@
 <template>
   <div>
-    <router-link to="/">Go to Home</router-link>
+    <v-breadcrumbs class="pl-0"
+        large
+        :items="[{text: 'Home', href: '/'}, {text: news.title}]"></v-breadcrumbs>
     <v-img
       v-if="news.urlToImage"
       :src="news.urlToImage"
-      max-width="500"
+      max-width="800px"
+      class="mb-5"
     ></v-img>
     <h1>{{ news.title }}</h1>
     <p>{{ news.content }}</p>
