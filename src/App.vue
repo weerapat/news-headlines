@@ -26,11 +26,7 @@
 
     <!-- Sizes your content based upon application components -->
     <v-main class="blue-grey lighten-5">
-      <!-- Provides the application the proper gutter -->
-      <v-container>
-        <!-- If using vue-router -->
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
