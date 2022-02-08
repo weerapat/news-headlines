@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <v-breadcrumbs class="pl-0"
-        large
-        :items="[{text: 'Home', href: '/'}, {text: news.title}]"></v-breadcrumbs>
+  <div v-if="news">
+    <div class="my-3">
+      <router-link to="/">Home</router-link>
+      /
+      <span>{{ news.title }}</span>
+    </div>
     <v-img
       v-if="news.urlToImage"
       :src="news.urlToImage"
@@ -21,6 +23,9 @@ export default {
     next((vm) => {
       vm.$store.dispatch('visitedHeadlines/add', to.path);
     });
+  },
+  mounted() {
+    this.$store.dispatch('newsHeadlines/get');
   },
   computed: {
     news() {
