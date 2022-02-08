@@ -27,31 +27,52 @@
         indeterminate
         color="primary"></v-progress-circular>
       </v-col>
-      <v-col v-else cols="12" sm="6" md="4"
+      <v-col v-else cols="12" md="6" lg="4" xl="3"
           v-for="newsHeadline in filteredHeadlines" :key="newsHeadline.slug"
       >
         <v-card
           elevation="2"
-          color="primary"
-          class="mb-5"
+          class="mb-5 mx-auto"
+          max-width="450"
         >
-          <v-card-title>{{ newsHeadline.title }}</v-card-title>
-          <v-card-text>{{ newsHeadline.description }}</v-card-text>
           <router-link :to="{ name: 'Detail', params: { slug: newsHeadline.slug }}">
-            <v-btn
-              text
-              color="deep-purple accent-4"
-            >
-              Learn More
-            </v-btn>
+            <v-img
+              height="200"
+              :src="newsHeadline.urlToImage"
+            ></v-img>
           </router-link>
-          <v-btn
-            text
-            color="white accent-4"
-            @click="openDialog(newsHeadline.slug, newsHeadline.title)"
-          >
-            edit
-          </v-btn>
+          <v-card-title class="text-h d-inline-block">
+            {{ newsHeadline.title }}
+            <v-btn
+              x-small
+              color="primary accent-4"
+              @click="openDialog(newsHeadline.slug, newsHeadline.title)"
+            >
+              edit
+            </v-btn>
+          </v-card-title>
+          <v-card-subtitle>
+            <v-icon
+              small
+              color="grey darken-2"
+            >
+              mdi-calendar
+            </v-icon>
+            {{ new Date(newsHeadline.publishedAt).toLocaleDateString('en-US') }}
+          </v-card-subtitle>
+          <v-card-text>{{ newsHeadline.description }}</v-card-text>
+          <v-card-actions>
+            <router-link :to="{ name: 'Detail', params: { slug: newsHeadline.slug }}">
+              <v-btn
+                text
+                color="primary accent-4"
+                class="px-2"
+                small
+              >
+                Read More
+              </v-btn>
+            </router-link>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -62,7 +83,7 @@
       width="500"
     >
       <v-card>
-        <v-card-title class="text-h5 grey lighten-2">
+        <v-card-title class="text-h6 primary darken-1 white--text">
           Edit Title
         </v-card-title>
 

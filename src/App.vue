@@ -10,27 +10,22 @@
         </ul>
       </div>
     </v-navigation-drawer>
-    <v-app-bar app>
+    <v-app-bar app class="text-h5">
       News
     </v-app-bar>
 
     <!-- Sizes your content based upon application components -->
-    <v-main>
+    <v-main class="blue-grey lighten-5">
       <!-- Provides the application the proper gutter -->
-      <v-container fluid>
+      <v-container>
         <!-- If using vue-router -->
         <router-view></router-view>
       </v-container>
     </v-main>
-
-    <v-footer app>
-      <!-- -->
-    </v-footer>
   </v-app>
 </template>
 
 <script>
-
 export default {
   name: 'App',
 
