@@ -22,10 +22,10 @@
     </v-row>
     <v-row>
       <v-col v-if='isHeadlinesLoading' cols="12">
-        ..Loading
         <v-progress-circular
           indeterminate
           color="primary"></v-progress-circular>
+        ..Loading
       </v-col>
       <v-col v-else cols="12" md="6" lg="4" xl="3"
          v-for="newsHeadline in filteredHeadlines" :key="newsHeadline.slug"
