@@ -2,14 +2,14 @@
   <v-container>
     <v-row>
       <v-col v-if='sources.length' sm="6" md="4">
-        <v-select
+        <v-autocomplete
           v-model="filters.source"
           :items="sources"
           item-text="name"
           item-value="id"
           label="Sources"
           clearable
-        ></v-select>
+        ></v-autocomplete>
       </v-col>
       <v-col sm="6" md="4">
         <v-text-field
