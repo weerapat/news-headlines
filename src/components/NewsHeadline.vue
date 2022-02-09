@@ -48,6 +48,10 @@
 <script>
 export default {
   name: 'NewsHeadline',
-  props: ['newsHeadline'],
+  props: {
+    newsHeadline: {
+      type: Object,
+    },
+  },
 };
 </script>

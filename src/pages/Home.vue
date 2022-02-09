@@ -82,6 +82,14 @@
         </v-form>
       </v-card>
     </v-dialog>
+
+    <v-snackbar
+      v-model="snackbar.isOpen"
+      timeout="5000"
+      color="red darken-1"
+    >
+      {{ snackbar.text }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -111,9 +119,18 @@ export default {
         (v) => (v && v.length <= 150) || 'Title must be less than 150 characters',
       ],
     },
+    snackbar: {
+      isOpen: false,
+      text: '',
+    },
   }),
   mounted() {
-    this.$store.dispatch('newsHeadlines/get');
+    this.$store.dispatch('newsHeadlines/get')
+      .catch((e) => {
+        this.snackbar.isOpen = true;
+        this.snackbar.text = e.response.data.message;
+      });
+
     this.$store.dispatch('sources/get');
   },
   methods: {
@@ -123,7 +140,6 @@ export default {
      * @param title
      */
     openDialog(slug, title) {
-      console.log(slug);
       this.isDialogOpen = true;
       this.form.headlineId = slug;
       this.form.title = title;
