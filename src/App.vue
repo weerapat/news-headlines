@@ -1,55 +1,46 @@
 <template>
   <v-app>
-    <v-app-bar
+    <v-navigation-drawer
+      class="indigo darken-4 white--text"
+      v-model="isDrawerOpen"
+      right
       app
-      color="primary"
-      dark
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
+      <div class="pa-4">
+        <h2>Visited Headlines</h2>
+        <ul>
+          <li v-for="(visitedHeadline, index) in visitedHeadlines" :key="index + visitedHeadline">
+            {{ visitedHeadline }}
+          </li>
+        </ul>
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+    </v-navigation-drawer>
+    <v-app-bar app dense class="text-h5 grey lighten-2">
+      News
+      <v-app-bar-nav-icon
+        fixed
+        right
+        @click.stop="isDrawerOpen = !isDrawerOpen"
+      ></v-app-bar-nav-icon>
     </v-app-bar>
 
-    <v-main>
-      <router-view/>
+    <!-- Sizes your content based upon application components -->
+    <v-main class="blue-grey lighten-5">
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-
 export default {
   name: 'App',
-
   data: () => ({
-    //
+    isDrawerOpen: true,
   }),
+  computed: {
+    visitedHeadlines() {
+      return this.$store.state.visitedHeadlines.data;
+    },
+  },
 };
 </script>

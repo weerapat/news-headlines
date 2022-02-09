@@ -1,4 +1,6 @@
-# news-app
+# News Headlines
+
+A simple application to display News Headlines
 
 ## Project setup
 ```
